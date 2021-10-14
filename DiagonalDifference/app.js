@@ -4,4 +4,4 @@ const arr = [
     [4,4,4],
   ];
   
-  console.log(arr[3][1]);
+  console.log(arr[3][2]);
