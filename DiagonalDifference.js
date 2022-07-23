@@ -14,7 +14,6 @@ process.stdin.on("data", function (inputStdin) {
 
 process.stdin.on("end", function () {
   inputString = inputString.split("\n");
-  console.log(inputString);
 
   main();
 });
@@ -32,7 +31,28 @@ function readLine() {
 
 function diagonalDifference(arr) {
   // Write your code here
-  return arr;
+  
+  let leftD = 0, rightD = 0, diaDiff = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+
+    let n = arr[i].length;
+
+    console.log(n);
+   
+    for (let j = 0; j < n; j++) {
+      
+      if (i == j) {
+        leftD += arr[i][j];
+      }
+      
+    }
+    
+  }
+
+  console.log(leftD);
+
+  return leftD;
 }
 
 function main() {
@@ -40,7 +60,7 @@ function main() {
 
   const n = parseInt(readLine().trim(), 10);
 
-  let arr = Array(n);
+  let arr = [];
 
   for (let i = 0; i < n; i++) {
     arr[i] = readLine()
