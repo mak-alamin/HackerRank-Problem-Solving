@@ -1,25 +1,25 @@
-"use strict";
+'use strict';
 
-const fs = require("fs");
+const fs = require('fs');
 
 process.stdin.resume();
-process.stdin.setEncoding("utf-8");
+process.stdin.setEncoding('utf-8');
 
-let inputString = "";
+let inputString = '';
 let currentLine = 0;
 
-process.stdin.on("data", function (inputStdin) {
-  inputString += inputStdin;
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
 });
 
-process.stdin.on("end", function () {
-  inputString = inputString.split("\n");
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
 
-  main();
+    main();
 });
 
 function readLine() {
-  return inputString[currentLine++];
+    return inputString[currentLine++];
 }
 
 /*
@@ -30,48 +30,45 @@ function readLine() {
  */
 
 function diagonalDifference(arr) {
-  // Write your code here
-  
+    // Write your code here
+    
   let leftD = 0, rightD = 0, diaDiff = 0;
 
+  let n = arr[0].length;
+  let k = n-1;
+    
   for (let i = 0; i < arr.length; i++) {
-
-    let n = arr[i].length;
-
-    console.log(n);
-   
-    for (let j = 0; j < n; j++) {
-      
+    for (let j = 0; j < n; j++) {   
       if (i == j) {
         leftD += arr[i][j];
       }
-      
     }
     
+    rightD += arr[i][k];
+    
+    k--;
   }
 
-  console.log(leftD);
+  diaDiff = Math.abs(leftD-rightD);
 
-  return leftD;
+  return diaDiff;
+
 }
 
 function main() {
-  const ws = fs.createWriteStream("output.txt");
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-  const n = parseInt(readLine().trim(), 10);
+    const n = parseInt(readLine().trim(), 10);
 
-  let arr = [];
+    let arr = Array(n);
 
-  for (let i = 0; i < n; i++) {
-    arr[i] = readLine()
-      .replace(/\s+$/g, "")
-      .split(" ")
-      .map((arrTemp) => parseInt(arrTemp, 10));
-  }
+    for (let i = 0; i < n; i++) {
+        arr[i] = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
+    }
 
-  const result = diagonalDifference(arr);
+    const result = diagonalDifference(arr);
 
-  ws.write(result + "\n");
+    ws.write(result + '\n');
 
-  ws.end();
+    ws.end();
 }
